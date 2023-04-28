@@ -108,7 +108,11 @@ class Test_Fil:
 
 
 if __name__ == "__main__":
-    os.system("clear")
+    platform = os.name
+    if platform == "posix":
+        os.system("clear")
+    elif platform == "nt":
+        os.system("cls")
     a  = """ _____             _      _____  _  _  _  _                    
 |_   _|  ___  ___ | |_   |  ___|(_)| || |(_) _ __   ___   __ _ 
   | |   / _ \/ __|| __|  | |_   | || || || || '_ \ / __| / _` |
@@ -118,14 +122,14 @@ if __name__ == "__main__":
     print(a)
     print('\033[1m' + "Тревожность ребёнка в школе" + '\033[0m')
     print("\nСейчас тебе будет предложен опросник, который состоит из вопросов о том,как ты себя чувствуешь в школе.\nСтарайся отвечать искренне и правдиво, здесь нет верных или неверных, хороших или плохих ответов.\nНад вопросами долго не задумывайся.\n")
-    csv_create()
+    csv_create(platform)
     #Проведение теста нужное кол-во раз
     while True:
         try:
             input("Нажмите Enter для начала тестирования | ctrl+c для выхода из программы\n")
             name = input("Введите своё ФИО: ").title()
             Class = input("Введите номер и букву своего класса: ").upper().replace(" ","")
-            test = Test_Fil(name,Class)
+            test = Test_Fil(name, Class)
         except KeyboardInterrupt:
             print("\nРабота программы завершена!")
             break
